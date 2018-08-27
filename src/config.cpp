@@ -29,8 +29,7 @@ void Config::ChangeToUserDirectory()
 {
 	if(chdir((GetHomePath() + USER_DIRECTORY_NAME).c_str()))
 	{
-
-    cout << "Cannot switch to user directory ('" << GetUserFilePath().c_str() << "')" << std::endl;
+		cout << "Cannot switch to user directory ('" << GetUserFilePath().c_str() << "')" << std::endl;
 	}
 }
 
