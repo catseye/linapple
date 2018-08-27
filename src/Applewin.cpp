@@ -795,7 +795,9 @@ int main(int argc, char * lpCmdLine[])
 
   // GPH: The very first thing we do is attempt to grab the needed configuration files and put them in the user's folder.
   Config config;
-  config.ValidateUserDirectory();
+  if (!config.ValidateUserDirectory()) {
+    return 1;
+  }
   config.ChangeToUserDirectory();
 
 
