@@ -10,6 +10,10 @@ PREFIX      := /usr/local
 # (You can build a version that loads assets from the source tree with: ASSET_DIR=`pwd`/res make )
 ASSET_DIR   ?= $(PREFIX)/share/$(PACKAGE)
 
+# Where default versions of resource files (linapple.conf, etc) are obtained from initially
+# (You can build a version that copies resources from the source tree with: RESOURCE_INIT_DIR=`pwd`/res make )
+RESOURCE_INIT_DIR ?= /etc/linapple
+
 #Compiler and Linker
 CC          := g++
 
@@ -45,7 +49,7 @@ CURL_LIBS = $(shell $(CURL_CONFIG) --libs)
 #DEBUGGING
 #CFLAGS      := -Wall -O0 -ggdb -ansi -c -finstrument-functions
 #OPTIMIZED
-CFLAGS      := -Wall -O3 -ansi -c -DASSET_DIR=\"$(ASSET_DIR)\"
+CFLAGS      := -Wall -O3 -ansi -c -DASSET_DIR=\"$(ASSET_DIR)\" -DRESOURCE_INIT_DIR=\"$(RESOURCE_INIT_DIR)\"
 CFLAGS 		+= $(SDL_CFLAGS)
 CFLAGS 		+= $(CURL_CFLAGS)
 
