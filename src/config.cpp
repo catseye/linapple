@@ -118,6 +118,7 @@ static const char *files[] =
 				return false;
 			}
 		}
+		bResult = true;
 	}
 	return bResult;
 }
