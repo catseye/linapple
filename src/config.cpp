@@ -79,16 +79,16 @@ bool Config::CopyFile(std::string srcFile, std::string destFile)
 bool Config::ValidateUserDirectory()
 {
 
-// GPH TOOD: Revisit with more elegant solution.
-// Looks like there's an official way to copy all files in a directory
-// for c++17 using filesystem::, but I just want something that's
-// going to work.
-static const char *files[] =
-{
-  "Master.dsk",
-  "linapple.conf",
-  ""
-};
+	// GPH TOOD: Revisit with more elegant solution.
+	// Looks like there's an official way to copy all files in a directory
+	// for c++17 using filesystem::, but I just want something that's
+	// going to work.
+	static const char *files[] =
+	{
+	  "Master.dsk",
+	  "linapple.conf",
+	  ""
+	};
 
 	bool bResult = false;
 	struct stat buffer;
@@ -106,9 +106,6 @@ static const char *files[] =
 		// Directory is absent.  This means we need to create it and copy over
 		// defaults from the install location.
 		mkdir(userDir.c_str(), S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
-		mkdir((userDir + CONF_DIRECTORY_NAME).c_str(), S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
-		mkdir((userDir + SAVED_DIRECTORY_NAME).c_str(), S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
-		mkdir((userDir + FTP_DIRECTORY_NAME).c_str(), S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
 
 		// Copy config options file
 		for( unsigned int i = 0; *files[ i ]; i++ ) {
@@ -118,6 +115,12 @@ static const char *files[] =
 				return false;
 			}
 		}
+
+                // Finally, make the subdirectories
+		mkdir((userDir + CONF_DIRECTORY_NAME).c_str(), S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
+		mkdir((userDir + SAVED_DIRECTORY_NAME).c_str(), S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
+		mkdir((userDir + FTP_DIRECTORY_NAME).c_str(), S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
+
 		bResult = true;
 	}
 	return bResult;
