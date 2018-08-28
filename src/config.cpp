@@ -84,7 +84,6 @@ bool Config::ValidateUserDirectory()
 // going to work.
 static const char *files[] =
 {
-  "Printer.txt",
   "Master.dsk",
   "LICENSE",
   "linapple.conf",
