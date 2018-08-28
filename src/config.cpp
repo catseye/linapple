@@ -85,7 +85,6 @@ bool Config::ValidateUserDirectory()
 static const char *files[] =
 {
   "Master.dsk",
-  "LICENSE",
   "linapple.conf",
   ""
 };
