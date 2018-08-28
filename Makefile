@@ -5,7 +5,10 @@ VERSION     := 2.1.1
 
 # Where does this get installed
 PREFIX      := /usr/local
-ASSET_DIR   := $(PREFIX)/share/$(PACKAGE)
+
+# Where assets (font file, etc) are read from
+# (You can build a version that loads assets from the source tree with: ASSET_DIR=`pwd`/res make )
+ASSET_DIR   ?= $(PREFIX)/share/$(PACKAGE)
 
 #Compiler and Linker
 CC          := g++
