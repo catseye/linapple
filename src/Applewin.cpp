@@ -455,7 +455,7 @@ void LoadConfiguration ()
 
   if(registry==NULL)
   {
-    printf("File " REGISTRY " could not be opened. Using default configuration.\n");
+    printf("Registry file (linapple.conf) could not be opened. Using default configuration.\n");
     return;
   }
   LOAD(TEXT("Computer Emulation"),&dwComputerType);
@@ -783,8 +783,6 @@ LPSTR GetNextArg(LPSTR lpCmdLine)
 }
 
 
-FILE *spMono, *spStereo;
-
 //---------------------------------------------------------------------------
 
 int main(int argc, char * lpCmdLine[])
@@ -795,19 +793,13 @@ int main(int argc, char * lpCmdLine[])
 
   // GPH: The very first thing we do is attempt to grab the needed configuration files and put them in the user's folder.
   Config config;
-  if (!config.ValidateUserDirectory()) {
-    return 1;
-  }
-  config.ChangeToUserDirectory();
-
+  config.ValidateUserDirectory();
 
 //    reading FullScreen and Boot from conf file?
   bool bSetFullScreen = false;
   bool bBoot = false;
 
-  registry = fopen(REGISTRY, "rt");  // open conf file (linapple.conf by default)
-  spMono = fopen("speakersmono.pcm","wb");
-  spStereo = fopen("speakersstereo.pcm","wb");
+  registry = fopen(config.GetRegistryPath().c_str(), "rt");  // open conf file (linapple.conf by default)
 
   LPSTR szImageName_drive1 = NULL; // file names for images of drive1 and drive2
   LPSTR szImageName_drive2 = NULL;
@@ -1100,8 +1092,6 @@ int main(int argc, char * lpCmdLine[])
   {
     fclose(registry);    //close conf file (linapple.conf by default)
   }
-  fclose(spMono);
-  fclose(spStereo);
 
   SDL_Quit();
 // CURL routines
